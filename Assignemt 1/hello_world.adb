@@ -1,5 +1,8 @@
--- Nicola Lea Libera, 117073
--- Philipp Tornow,
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+-- Description: A simple Hello World Programs that prints a
+--				string. 
+--------------------------------------------------------------
 
 with Ada.Text_IO;
 
