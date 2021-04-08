@@ -12,20 +12,22 @@ use  Ada.Text_IO, Ada.Integer_Text_IO;
 procedure Box_Geometry is
     Length, Width, Height, Surface_Area : Integer;                      
 begin
-    Put ("Please enter three integers representing the length, the " &
+    Put("Please enter three integers representing the length, the " &
         "width and the height of a box in centimeters." &
-        " Seperate them by a space: ");                 
-    Get (Length);                                  
-    Get (Width); 
-    Get (Height);                                
-    Put ("The volume of the box is ");                           
-    Put (Length * Width * Height, Width=>1);
-    Put (" cubic centimetre.");                          
+        " Seperate them with spaces: ");                 
+    Get(Length);                                  
+    Get(Width); 
+    Get(Height);  
+
+    Put("The volume of the box is ");                           
+    Put(Length * Width * Height, Width=>1);
+    Put(" cubic centimetre.");                          
     New_Line; 
+
     Surface_Area := 2 * (Length * Width + Length * Height + 
                     Width * Height); 
-    Put ("The surface area of the box is ");                           
-    Put (Surface_Area, Width=>1); 
-    Put (" square centimetre.");
+    Put("The surface area of the box is ");                           
+    Put(Surface_Area, Width=>1); 
+    Put(" square centimetre.");
     New_Line;                              
 end Box_Geometry;
