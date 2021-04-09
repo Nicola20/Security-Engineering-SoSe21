@@ -8,7 +8,7 @@
 with Ada.Text_IO, Ada.Integer_Text_IO;            
 use  Ada.Text_IO, Ada.Integer_Text_IO; 
 
-procedure Simple_Calculations is
+procedure Calculator is
     First, Second : Integer; 
     Answer : Character;                     
 begin
@@ -55,4 +55,4 @@ begin
             end if;
         end loop Inner;
     end loop Outer;                                
-end Simple_Calculations;
+end Calculator;

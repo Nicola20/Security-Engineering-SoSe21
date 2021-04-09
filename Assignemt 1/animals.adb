@@ -6,7 +6,7 @@
 
 with Ada.Text_IO;
 
-procedure Animal is
+procedure Animals is
 	use Ada.Text_IO;
 	Answer : Character;
 begin
@@ -87,4 +87,4 @@ begin
 			end if;
 		end if;
 	end if;
-end Animal;
+end Animals;
