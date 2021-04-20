@@ -29,12 +29,12 @@ procedure Cards is
         Suit_G : Random_Suit.Generator;
         Index_G : Random_Index.Generator;
         Res : Card;
-    
+
     begin
-        -- get random suit 
+        -- get random suit
         Random_Suit.Reset(Suit_G);
         Res.S := Random_Suit.Random(Suit_G);
-        
+
         -- get random value index
         Random_Index.Reset(Index_G);
         Res.V := Random_Index.Random(Index_G);
@@ -55,11 +55,11 @@ begin
     Card_1 := Rand_Card;
     loop
         Card_2 := Rand_Card;
-        exit when Card_1 /= Card_2; 
+        exit when Card_1 /= Card_2;
     end loop;
-    -- in case of querying any number of cards, a vector has to be used 
+    -- in case of querying any number of cards, a vector has to be used
 
-    -- print corresponding cards 
+    -- print corresponding cards
     if Card_1.V = 1 then
         TEXTIO.Put("Card 1: " & Card_1.S'Image & " ");
         Symbol_IO.Put(Symbol'Val(0));

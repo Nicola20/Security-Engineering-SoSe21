@@ -5,7 +5,7 @@
 with Ada.Text_IO, Ada.Numerics.Elementary_Functions;
 
 package body Vectors is
-    
+
     function "+" (Left: Vector; Right: Vector) return Vector is
     begin
         return (X => Left.X + Right.X,  Y => Left.Y + Right.Y, Z => Left.Z + Right.Z);
@@ -24,7 +24,7 @@ package body Vectors is
 
     function "*"(Left: Vector; Right: Vector) return Float is
     begin
-        return Float(Left.X * Right.X + Left.Y * Right.Y + Left.Z * Right.Z);
+        return (Left.X * Right.X + Left.Y * Right.Y + Left.Z * Right.Z);
     end "*";
 
     function "=" (Left: Vector; Right: Vector) return Boolean is
@@ -52,9 +52,9 @@ package body Vectors is
         );
     end Cross_Product;
 
-    function Distance(Left: Vector; Right: Vector) return Float is 
+    function Distance(Left: Vector; Right: Vector) return Float is
     begin
-        return ( Ada.Numerics.Elementary_Functions.Sqrt( Float(
+        return ( Ada.Numerics.Elementary_Functions.Sqrt((
             (Left.X - Right.X) * (Left.X - Right.X) +
             (Left.Y - Right.Y) * (Left.Y - Right.Y) +
             (Left.Z - Right.Z) * (Left.Z - Right.Z)
@@ -63,7 +63,7 @@ package body Vectors is
 
     function Distance_To_Origin(Item: Vector) return Float is
     begin
-        return ( Ada.Numerics.Elementary_Functions.Sqrt( Float(
+        return ( Ada.Numerics.Elementary_Functions.Sqrt((
             (Item.X - Float(0)) * (Item.X - Float(0)) +
             (Item.Y - Float(0)) * (Item.Y - Float(0)) +
             (Item.Z - Float(0)) * (Item.Z - Float(0))
