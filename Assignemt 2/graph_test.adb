@@ -4,7 +4,10 @@ use Ada.Text_IO;
 procedure Graph_Test is
     subtype Vertex_Type is Integer;
     package G is new Graph(Vertex_Type, "=");
-    use G;  
+    use G; 
+    Edge_Weight: Integer := 0; 
+    Contains_Edge: Boolean := False;
+    Removed_Edge: Boolean := False;
      
 begin
     Put_Line("Test graphs:");
@@ -18,9 +21,25 @@ begin
     Add_Edge(9, 5, 4);
     Add_Edge(3, 8, 7);
     Add_Edge(5, 9, 4);
+    Edge_Weight := Get_Edge_Weight(3, 8);
+    Edge_Weight := Get_Edge_Weight(7, 5);
+    Clear;
+    Edge_Weight := Get_Edge_Weight(3, 8);
+    Add_Edge(3, 8, 4);
+    Contains_Edge := Has_Edge(3, 8);
+    Put(Boolean'Image(Contains_Edge));
+    New_Line;
+    Contains_Edge := Has_Edge(8, 3);
+    Put(Boolean'Image(Contains_Edge));
+    New_Line;
+    Removed_Edge := Remove_Edge(3, 8);
+    Removed_Edge := Remove_Edge(3, 8);
+    Add_Vertex(9);
+    Add_Vertex(3);
+    declare
+    	Graph_Vertices_Array: Vertex_Array := To_Vertex_Array;
+    begin
+    	Put_Line("Converted vertices to array");
+    end;
 
-
-    Put_Line("Hello");
-    --Graph_Vertices := To_Vertex_Array; 
-    
 end Graph_Test;

@@ -29,8 +29,8 @@ package Graph is
 	function Remove_Edge(From: Vertex_Type; To: Vertex_Type) return Boolean;
 	-- Removes the edge in the Graph from From to To, if existing;
 	-- Raises an Edge_Not_Found_Exception otherwise.
-	--function To_Vertex_Array return Vertex_Array;
-	-- Returns an array containin g exactly all current vertices of the graph.
+	function To_Vertex_Array return Vertex_Array;
+	-- Returns an array containing exactly all current vertices of the graph.
 private
 	type Edge_Type is record
 		From: Vertex_Type;
