@@ -9,6 +9,9 @@ with Ada.Text_IO;
 
 procedure Cards is
 
+    package TEXTIO renames Ada.Text_IO;
+    package Symbol_IO is new TEXTIO.Enumeration_IO(Symbol);
+
     -- define enums for suits and symbols
     type Suit is (Club,Diamond,Heart,Spade);
     type Symbol is (Ace,Jack,Queen,King);
@@ -46,9 +49,6 @@ procedure Cards is
     -- Results
     Card_1 : Card;
     Card_2 : Card;
-
-    package TEXTIO renames Ada.Text_IO;
-    package Symbol_IO is new TEXTIO.Enumeration_IO(Symbol);
 
 begin
     -- query 2 cards
