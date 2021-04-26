@@ -1,5 +1,10 @@
-package body Graph is
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Body of the graph package
+--------------------------------------------------------------
 
+package body Graph is
 
 	procedure Add_Vertex(Vertex: Vertex_Type) is
 	begin
@@ -22,23 +27,33 @@ package body Graph is
 		New_Edge: Edge_Type := (From, To, Weight);
 		Edge_Already_Exists: Boolean := False;
 	begin
-		if not Edges.Is_Empty then
-			for E of Edges loop
-				if E.From = From and E.To = To then
-					Ada.Text_IO.Put_Line("Added New Weight to already existing edge");
-					E.Weight := Weight;
-					Edge_Already_Exists := True;
-					exit;
+		if Vertices.Find(From) = Vertex_Vectors.No_Element or 
+			Vertices.Find(To) = Vertex_Vectors.No_Element then
+			raise Vertex_Not_In_Graph_Exception;
+		else
+			if not Edges.Is_Empty then
+				for E of Edges loop
+					if E.From = From and E.To = To then
+						Ada.Text_IO.Put_Line("Added New Weight to already existing edge");
+						E.Weight := Weight;
+						Edge_Already_Exists := True;
+						exit;
+					end if;
+				end loop;
+				if Edge_Already_Exists = False then
+					Edges.Append(New_Edge);
+					Ada.Text_IO.Put_Line("Added New Edge");
 				end if;
-			end loop;
-			if Edge_Already_Exists = False then
+			else
 				Edges.Append(New_Edge);
 				Ada.Text_IO.Put_Line("Added New Edge");
 			end if;
-		else
-			Edges.Append(New_Edge);
-			Ada.Text_IO.Put_Line("Added New Edge");
 		end if;
+		exception
+			when Vertex_Not_In_Graph_Exception =>
+    			Ada.Text_IO.Put_Line("One or both vertices of this edge do not exists.");
+	    	when others =>
+	    		Ada.Text_IO.Put_Line("Unknown error!");
 	end Add_Edge;
 
 

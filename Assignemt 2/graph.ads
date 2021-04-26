@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Package specification for graph package
+--------------------------------------------------------------
+
 with Ada.Containers.Vectors, Ada.Text_IO;
 
 generic
@@ -6,6 +12,7 @@ generic
 package Graph is
 	Edge_Not_Found_Exception: exception;
 	Vertex_Already_In_Graph_Exception: exception;
+	Vertex_Not_In_Graph_Exception: exception;
 
 	type Edge_Type is private;
 	type Vertex_Array is array(Natural range <>) of Vertex_Type;
@@ -18,6 +25,9 @@ package Graph is
 	-- Weight assigned to it . If an edge from From to To is already stored
 	-- in the Graph, this function only re-assigns the given Weight to it
 	-- and does nothing beyond.
+	-- Before storing it the existence of the two vertices inside the graph
+	-- is checked. If one or both do not exist, an Vertex_Not_In_Graph_Exception
+	-- is raised.
 	procedure Clear;
 	-- Removes all vertices and edges from the graph.
 	function Get_Edge_Weight(From: Vertex_Type; To: Vertex_Type) return Integer;
