@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Declarations for a simple bank account with pre and post conditions
+--------------------------------------------------------------
+
 package Bank_Accounts is
     subtype Cents_Type is Integer;
     type Account_Type is record

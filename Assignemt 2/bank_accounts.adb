@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Definition of bank_accounts.adb with conditions
+--------------------------------------------------------------
+
 package body Bank_Accounts is
 
 function Get_Balance(Account: Account_Type) return Cents_Type is

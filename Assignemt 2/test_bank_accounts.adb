@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Tests the bank account and on compie tests the Pre, Post conditions
+--------------------------------------------------------------
+
 with Bank_Accounts, Ada.Text_IO;
 use Bank_Accounts, Ada.Text_IO;
 
