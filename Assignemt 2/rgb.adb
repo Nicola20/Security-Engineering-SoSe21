@@ -106,7 +106,7 @@ begin
     elsif C_Max = G then
         Hue := Integer(60.0 * (B - R)/D + 2.0);
     else
-        Hue := Integer(60 * (R - G)/D + 4.0);
+        Hue := Integer(60.0 * (R - G)/D + 4.0);
     end if;
 
     -- check if hue is negative
