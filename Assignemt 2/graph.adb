@@ -14,12 +14,6 @@ package body Graph is
 		else
 			raise Vertex_Already_In_Graph_Exception;
 		end if;
-
-	exception
-		when Vertex_Already_In_Graph_Exception =>
-    		Ada.Text_IO.Put_Line("This vertex already exists inside the graph!");
-    	when others =>
-    		Ada.Text_IO.Put_Line("Unknown error!");
 	end Add_Vertex;
 
 
@@ -49,11 +43,6 @@ package body Graph is
 				Ada.Text_IO.Put_Line("Added New Edge");
 			end if;
 		end if;
-		exception
-			when Vertex_Not_In_Graph_Exception =>
-    			Ada.Text_IO.Put_Line("One or both vertices of this edge do not exists.");
-	    	when others =>
-	    		Ada.Text_IO.Put_Line("Unknown error!");
 	end Add_Edge;
 
 
@@ -79,13 +68,6 @@ package body Graph is
 		else
 			raise Edge_Not_Found_Exception;
 		end if;
-	exception
-		when Edge_Not_Found_Exception =>
-    		Ada.Text_IO.Put_Line("ERROR: The edge does not exist!");
-    		return 0;
-    	when others =>
-    		Ada.Text_IO.Put_Line("Unknown error!");
-    		return 0;
 	end Get_Edge_Weight;
 
 
@@ -121,13 +103,6 @@ package body Graph is
 		else
 			raise Edge_Not_Found_Exception;
 		end if;
-	exception
-		when Edge_Not_Found_Exception =>
-    		Ada.Text_IO.Put_Line("ERROR: The edge does not exist!");
-    		return False;
-    	when others =>
-    		Ada.Text_IO.Put_Line("Unknown error!");
-    		return False;
 	end Remove_Edge;
 
 
