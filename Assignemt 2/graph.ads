@@ -1,10 +1,10 @@
---------------------------------------------------------------
+-- ------------------------------------------------------------
 -- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
 --          Lucas Hübner (116232)
 -- Description: Package specification for graph package
---------------------------------------------------------------
+-- ------------------------------------------------------------
 
-with Ada.Containers.Vectors, Ada.Text_IO;
+with Ada.Containers.Vectors;
 
 generic
 	type Vertex_Type is private;

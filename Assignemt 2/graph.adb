@@ -3,7 +3,7 @@
 --          Lucas Hübner (116232)
 -- Description: Body of the graph package
 --------------------------------------------------------------
-
+with Ada.Text_IO;
 package body Graph is
 
 	procedure Add_Vertex(Vertex: Vertex_Type) is
@@ -18,7 +18,7 @@ package body Graph is
 
 
 	procedure Add_Edge(From: Vertex_Type; To: Vertex_Type; Weight: Integer) is
-		New_Edge: Edge_Type := (From, To, Weight);
+		New_Edge: constant Edge_Type := (From, To, Weight);
 		Edge_Already_Exists: Boolean := False;
 	begin
 		if Vertices.Find(From) = Vertex_Vectors.No_Element or 
