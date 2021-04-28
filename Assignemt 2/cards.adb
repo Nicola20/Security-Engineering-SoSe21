@@ -8,13 +8,12 @@ with Ada.Numerics.Discrete_Random;
 with Ada.Text_IO;
 
 procedure Cards is
-
-    package TEXTIO renames Ada.Text_IO;
-    package Symbol_IO is new TEXTIO.Enumeration_IO(Symbol);
-
     -- define enums for suits and symbols
     type Suit is (Club,Diamond,Heart,Spade);
     type Symbol is (Ace,Jack,Queen,King);
+
+    package TEXTIO renames Ada.Text_IO;
+    package Symbol_IO is new TEXTIO.Enumeration_IO(Symbol);
 
     -- declare values
     type Value is range 1..13;
