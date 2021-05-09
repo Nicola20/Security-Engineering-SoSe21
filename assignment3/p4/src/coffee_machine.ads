@@ -12,6 +12,7 @@ package Coffee_Machine is
 	type Reaction is (Nothing, Drop_All_Coins, Coffee);
 
 	procedure Initialize (S : out State);
+
 	procedure Input(S 		: in out State;
 				Act 	: in Action;
 				React 	: out Reaction);
