@@ -10,12 +10,8 @@ package body Coffee_Machine is
     -- post condition: state has to be 0
     is
     begin
-        Ada.Text_IO.Put_Line(State'Image(S));
         S := 0;
-        Ada.Text_IO.Put_Line("Initialized");
-        Ada.Text_IO.Put_Line(State'Image(S));
     end Initialize;
-
 
 
 	procedure Input(S : in out State; Act : in Action;
@@ -45,9 +41,17 @@ package body Coffee_Machine is
                 React := Coffee;
             end if;
         end if;
-
-        Ada.Text_IO.Put_Line(State'Image(S));
-        Ada.Text_IO.Put_Line(Reaction'Image(React));
     end Input;
+
+
+    function Check_For_Equality(S : in out State; I : Integer) return Boolean is
+    begin
+        if Integer(S) = I then
+            return True;
+        else
+            return False;
+        end if;
+    end Check_For_Equality;
+
 
 end Coffee_Machine;
