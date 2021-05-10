@@ -1,0 +1,20 @@
+project ps3_tg_frac is
+
+   for Main use ("frac_test_tg.adb");
+   for Source_Dirs use ("src", "tests");
+   for Object_Dir use "bin";
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-g", "-gnato", "-gnatwe", "-gnatwa", "-gnatQ", "-gnato", "-gnata", "-gnat12");
+   end Compiler;
+
+   package Builder is
+      for Default_Switches ("ada") use ();
+   end Builder;
+
+   package Ide is
+      for Compiler_Command ("ada") use "gnatmake";
+      for Compiler_Command ("c") use "gcc";
+   end Ide;
+
+end ps3_tg_frac;

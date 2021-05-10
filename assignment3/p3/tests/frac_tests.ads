@@ -5,10 +5,31 @@ use AUnit;
 use AUnit.Test_Cases;
 
 package Frac_Tests is
-	
+
 	type Test is new Test_Case with null record;
-	
+
 	procedure Register_Tests(T: in out Test);
 	function Name(T: Test) return Test_String;
-	
+
+	procedure Test_Constructor_OneHalf (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Constructor_NegativeDenummerator(T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Constructor_NegativeNumerator (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Constructor_NegativeComponents (T : in out Test_Cases.Test_Case'Class);
+
+	--procedure Test_Addition (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Subtraction (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Multiplication(T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Division(T : in out Test_Cases.Test_Case'Class);
+
+	--procedure Test_Equality_Same (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Equality_Multiple (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Smaller_Comparison (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Greater_Comparison (T : in out Test_Cases.Test_Case'Class);
+
+	--procedure Test_Sign_Positive (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Sign_Negaitve (T : in out Test_Cases.Test_Case'Class);
+	--procedure Test_Sign_Null (T : in out Test_Cases.Test_Case'Class);
+
+	--procedure Test_Reduction (T : in out Test_Cases.Test_Case'Class);
+
 end Frac_Tests;
