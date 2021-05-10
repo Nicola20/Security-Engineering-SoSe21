@@ -6,78 +6,85 @@ package body Coffee_Tests is
     use Coffee_Machine;
 
     procedure Test_Initialization (T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
     begin
         Initialize(Test_State);
-        Assert(Test_State = 0, "Initialization failed.");
+        Assert(Check_For_Equality(Test_State, 0), "Initialization failed.");
     end Test_Initialization;
 
 
-	procedure Test_Insert_Ten_Cent (T : in out Test_Cases.Test_Case'Class) is
+	procedure Test_Insert_Ten_Cent(T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
         Coffe_Machine_Reaction : Reaction;
     begin
         Initialize(Test_State);
         Input(Test_State, Ten_Cent, Coffe_Machine_Reaction);
-        Assert(Test_State = 1);
-        Assert(Coffe_Machine_Reaction = Nothing);
+        Assert(Check_For_Equality(Test_State, 1), "State is not correct");
+        Assert(Coffe_Machine_Reaction = Nothing, "Coffee machine reaction went wrong");
     end Test_Insert_Ten_Cent;
 
 
     procedure Test_Insert_Twenty_Cent (T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
         Coffe_Machine_Reaction : Reaction;
     begin
         Initialize(Test_State);
         Input(Test_State, Twenty_Cent, Coffe_Machine_Reaction);
-        Assert(Test_State = 2);
-        Assert(Coffe_Machine_Reaction = Nothing);
+        Assert(Check_For_Equality(Test_State, 2), "State is not correct");
+        Assert(Coffe_Machine_Reaction = Nothing, "Coffee machine reaction went wrong");
     end Test_Insert_Twenty_Cent;
 
 
 	procedure Test_Get_Coffee_Exactly (T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
         Coffe_Machine_Reaction : Reaction;
     begin
         Initialize(Test_State);
         Input(Test_State, Twenty_Cent, Coffe_Machine_Reaction);
         Input(Test_State, Ten_Cent, Coffe_Machine_Reaction);
-        Assert(Test_State = 0);
+        Assert(Check_For_Equality(Test_State, 0), "State is not correct");
         Assert(Coffe_Machine_Reaction = Coffee, "Getting coffee exactly went wrong");
     end Test_Get_Coffee_Exactly;
 
 
     procedure Test_Get_Coffee_Overspending(T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
         Coffe_Machine_Reaction : Reaction;
     begin
         Initialize(Test_State);
         Input(Test_State, Twenty_Cent, Coffe_Machine_Reaction);
         Input(Test_State, Twenty_Cent, Coffe_Machine_Reaction);
-        Assert(Test_State = 0);
+        Assert(Check_For_Equality(Test_State, 0), "State is not correct");
         Assert(Coffe_Machine_Reaction = Coffee, "Getting coffee while overspending went wrong");
     end Test_Get_Coffee_Overspending;
 
 
 	procedure Test_Button_Money_Inserted  (T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
         Coffe_Machine_Reaction : Reaction;
     begin
         Initialize(Test_State);
         Input(Test_State, Twenty_Cent, Coffe_Machine_Reaction);
         Input(Test_State, Button, Coffe_Machine_Reaction);
-        Assert(Test_State = 0);
+        Assert(Check_For_Equality(Test_State, 0), "State is not correct");
         Assert(Coffe_Machine_Reaction = Drop_All_Coins, "Pressing button went wrong");
     end Test_Button_Money_Inserted;
 
 
     procedure Test_Button_No_Money_Inserted  (T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
         Test_State : State;
         Coffe_Machine_Reaction : Reaction;
     begin
         Initialize(Test_State);
         Input(Test_State, Button, Coffe_Machine_Reaction);
-        Assert(Test_State = 0);
+        Assert(Check_For_Equality(Test_State, 0), "State is not correct");
         Assert(Coffe_Machine_Reaction = Drop_All_Coins, "Pressing button went wrong");
     end Test_Button_No_Money_Inserted;
 

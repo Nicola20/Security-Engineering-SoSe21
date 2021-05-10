@@ -14,10 +14,14 @@ package Coffee_Machine is
 	procedure Initialize (S : out State);
 
 	procedure Input(S 		: in out State;
-				Act 	: in Action;
-				React 	: out Reaction);
+					Act 	: in Action;
+					React 	: out Reaction);
+
+	function Check_For_Equality(S : in out State; I : Integer) return Boolean;
 
 	private
-		type State is range 0..2;		
+		type State is range 0..2;
+
+		--function Check_Conditions_For_Input(S : State; Act : Action; React : Reaction) return Boolean;	
 
 end Coffee_Machine;
