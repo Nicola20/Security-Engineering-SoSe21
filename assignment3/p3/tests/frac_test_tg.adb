@@ -66,10 +66,9 @@ begin  -- unit main block
     I1 : constant Integer := 1;
     I2 : constant Integer := 2;
     R1 : Integer;
-    F1 : Fraction;
   begin  -- test case
     begin  -- test part
-      F1 := Rational_Numbers.Create_Fraction(I1, I2);
+      F1 : Fraction := Rational_Numbers.Create_Fraction(I1, I2);
       R1 := Rational_Numbers.Get_Numerator(F1);
       Driver_Internals.Set_Path ("=>");
     exception
