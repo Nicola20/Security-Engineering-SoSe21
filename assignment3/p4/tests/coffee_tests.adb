@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: AUnit tests for the coffee machine
+--------------------------------------------------------------
+
 with AUnit.Assertions;
 with Coffee_Machine;
 

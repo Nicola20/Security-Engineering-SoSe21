@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Declarations for a simple coffee machine
+--------------------------------------------------------------
+
 package Coffee_Machine is
 
 	-- Simulation of a coin-driven coffee machine
@@ -11,17 +17,21 @@ package Coffee_Machine is
 	type Action is (Ten_Cent, Twenty_Cent, Button);
 	type Reaction is (Nothing, Drop_All_Coins, Coffee);
 
-	procedure Initialize (S : out State);
+	function Check_For_Equality(S : in out State; I : Integer) return Boolean;
+
+	procedure Initialize (S : out State)
+	with
+		Post => Check_For_Equality(S, 0);
 
 	procedure Input(S 		: in out State;
 					Act 	: in Action;
-					React 	: out Reaction);
-
-	function Check_For_Equality(S : in out State; I : Integer) return Boolean;
+					React 	: out Reaction)
+	with
+        Post => (if Act = Button then Check_For_Equality(S, 0) and React = Drop_All_Coins
+				elsif Act = Ten_Cent or Act = Twenty_Cent then React = Nothing 
+					or React = Coffee);
 
 	private
 		type State is range 0..2;
-
-		--function Check_Conditions_For_Input(S : State; Act : Action; React : Reaction) return Boolean;	
 
 end Coffee_Machine;

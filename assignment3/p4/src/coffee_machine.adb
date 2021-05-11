@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Implementation of a simple coffee machine
+--------------------------------------------------------------
+
 with Ada.Text_IO;
 package body Coffee_Machine is
 	-- Simulation of a coin-driven coffee machine
@@ -6,17 +12,24 @@ package body Coffee_Machine is
 	-- Machine: one slot to drop coins, the coffee output
 	-- Given 30 cents or more, the coffee is produced immediately
 	-- (Note that Overspending is Possible)
-    procedure Initialize (S : out State) 
-    -- post condition: state has to be 0
-    is
+    function Check_For_Equality(S : in out State; I : Integer) return Boolean is
+    begin
+        if Integer(S) = I then
+            return True;
+        else
+            return False;
+        end if;
+    end Check_For_Equality;
+
+
+    procedure Initialize (S : out State) is
     begin
         S := 0;
     end Initialize;
 
 
 	procedure Input(S : in out State; Act : in Action;
-				    React : out Reaction) 
-    is
+				    React : out Reaction) is
     begin
         if Act = Button then
             React := Drop_All_Coins;
@@ -41,17 +54,9 @@ package body Coffee_Machine is
                 React := Coffee;
             end if;
         end if;
+        Ada.Text_IO.Put_Line(State'Image(S));
+        Ada.Text_IO.Put_Line(Action'Image(Act));
+        Ada.Text_IO.Put_Line(Reaction'Image(React));
     end Input;
-
-
-    function Check_For_Equality(S : in out State; I : Integer) return Boolean is
-    begin
-        if Integer(S) = I then
-            return True;
-        else
-            return False;
-        end if;
-    end Check_For_Equality;
-
 
 end Coffee_Machine;
