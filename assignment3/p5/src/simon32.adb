@@ -1,5 +1,8 @@
-with Ada.Text_IO;
-use Ada.Text_IO;
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Implementation of rational numbers definition
+--------------------------------------------------------------
 
 package body Simon32 is
 

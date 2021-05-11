@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Implementation of rational numbers definition
+--------------------------------------------------------------
+
 with AUnit.Assertions;
 with Simon32;
 
