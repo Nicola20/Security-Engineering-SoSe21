@@ -11,4 +11,9 @@ package Bank_Accounts_Tests is
     procedure Register_Tests(T: in out Test);
     function Name(T: Test) return Test_String;
 
+    procedure Test_Get_Balance (T : in out Test_Cases.Test_Case'Class);
+    procedure Test_Deposit (T : in out Test_Cases.Test_Case'Class);
+	procedure Test_Withdraw (T : in out Test_Cases.Test_Case'Class);
+	procedure Test_Transfer (T : in out Test_Cases.Test_Case'Class);
+
 end Bank_Accounts_Tests;

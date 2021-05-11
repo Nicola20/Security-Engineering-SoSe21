@@ -29,7 +29,7 @@ package body Bank_Accounts is
     procedure Put(Account: in Account_Type) is
     begin
         TEXTIO.Put("Current Balance: ");
-        TEXTIO.Put(Account.Get_Balance(Account)'Image);
+        TEXTIO.Put(Get_Balance(Account)'Image);
         TEXTIO.Put(" Euro");
     end Put;
 
