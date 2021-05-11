@@ -279,13 +279,13 @@ package body Frac_Tests is
 	procedure Test_Sign_Negative (T : in out Test_Cases.Test_Case'Class) is
         pragma Unreferenced(T);
     begin
-        Assert(Sign(F4_0) = 0, "Frac sign null failed.");
+        Assert(Sign(F3_n) = -1, "Frac sign null failed.");
     end Test_Sign_Negative;
 
 	procedure Test_Sign_Null (T : in out Test_Cases.Test_Case'Class) is
         pragma Unreferenced(T);
     begin
-        Assert(Sign(F3_n) = -1, "Frac sign negative failed.");
+        Assert(Sign(F4_0) = 0, "Frac sign negative failed.");
     end Test_Sign_Null;
 
 end Frac_Tests;
