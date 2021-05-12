@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Rational numbers declaration
+--------------------------------------------------------------
+
 package Rational_Numbers is
     type Fraction is tagged private;
     subtype Sign_Type is Integer range -1..1;

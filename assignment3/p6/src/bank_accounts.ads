@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Bank_Accounts declaration
+--------------------------------------------------------------
+
 package Bank_Accounts is
     subtype Cents_Type is Integer;
     Default_Balance: constant Cents_Type := 0;

@@ -1,7 +1,7 @@
 --------------------------------------------------------------
 -- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
 --          Lucas Hübner (116232)
--- Description: Implementation of rational numbers definition
+-- Description: Aunit tests simon32 definition
 --------------------------------------------------------------
 
 with AUnit.Assertions;
@@ -11,7 +11,7 @@ use AUnit.Assertions;
 use Simon32;
 
 package body Simon32.Simon32_Tests is
-   
+
    procedure Test_Raising_Exception (T : in out Test_Cases.Test_Case'Class) is
       pragma Unreferenced (T);
    begin
@@ -30,7 +30,7 @@ package body Simon32.Simon32_Tests is
       tmp := Encrypt(PlainText);
       Assert (tmp = ChipherText, "Encryption is incorrect");
    end Test_Encrypt;
-   
+
    procedure Test_Decrypt (T : in out Test_Cases.Test_Case'Class) is
       pragma Unreferenced (T);
       Key : constant Block_64 := (25, 24, 17, 16, 9, 8, 1, 0);
@@ -42,7 +42,7 @@ package body Simon32.Simon32_Tests is
       tmp := Decrypt(ChipherText);
       Assert (tmp = PlainText, "Decryption is incorrect");
    end Test_Decrypt;
-   
+
    procedure Test_Dec_Seclusion (T : in out Test_Cases.Test_Case'Class) is
       pragma Unreferenced (T);
       Key : constant Block_64 := (25, 24, 17, 16, 9, 8, 1, 0);
@@ -51,7 +51,7 @@ package body Simon32.Simon32_Tests is
       Prepare_Key(Key);
       Assert (PlainText = Decrypt(Encrypt(PlainText)), "Decryption is Secluded");
    end Test_Dec_Seclusion;
-   
+
    procedure Test_Enc_Seclusion (T : in out Test_Cases.Test_Case'Class) is
       pragma Unreferenced (T);
       Key : constant Block_64 := (25, 24, 17, 16, 9, 8, 1, 0);
@@ -60,7 +60,7 @@ package body Simon32.Simon32_Tests is
       Prepare_Key(Key);
       Assert (ChipherText = Encrypt(Decrypt(ChipherText)), "Encryption is Secluded");
    end Test_Enc_Seclusion;
-	
+
 	procedure Register_Tests(T: in out Simon32_Test) is
 	    use AUnit.Test_Cases.Registration;
 	begin
@@ -70,11 +70,11 @@ package body Simon32.Simon32_Tests is
       Register_Routine(T, Test_Enc_Seclusion'Access, "Test Enc. Seclusion");
       Register_Routine(T, Test_Dec_Seclusion'Access, "Test Dec. Seclusion");
 	end Register_Tests;
-	
+
 	function Name(T: Simon32_Test) return Test_String is
 	    pragma Unreferenced(T);
 	begin
 	    return Format("Simon32_Tests");
 	end Name;
-	
+
 end Simon32.Simon32_Tests;

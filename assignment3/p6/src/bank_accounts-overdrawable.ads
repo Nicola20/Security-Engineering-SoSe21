@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Bank_Accounts_Overdrawable declaration
+--------------------------------------------------------------
+
 with Bank_Accounts;
 
 package Bank_Accounts.Overdrawable is

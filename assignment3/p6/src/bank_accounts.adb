@@ -1,5 +1,11 @@
-    with Ada.Text_IO;
-    with Bank_Accounts; use Bank_Accounts;
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Bank_Accounts definition
+--------------------------------------------------------------
+
+with Ada.Text_IO;
+with Bank_Accounts; use Bank_Accounts;
 
 package body Bank_Accounts is
 

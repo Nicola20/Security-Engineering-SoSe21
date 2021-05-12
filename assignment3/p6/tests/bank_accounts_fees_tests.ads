@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Aunit tests Bank_Accounts_Fees declaration
+--------------------------------------------------------------
+
 with AUnit;
 with AUnit.Test_Cases;
 
