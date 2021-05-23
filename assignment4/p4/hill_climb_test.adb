@@ -9,13 +9,12 @@ with Ada.Numerics.Generic_Elementary_Functions;
 use Ada.Text_IO;
 
 procedure Hill_Climb_Test is
-    function Minimization (X : Integer) return Integer is
+    function Evaluation (X : Integer) return Integer is
     begin
        return X**3 + 3 * X**2 - 2 * X + 1;
-    end Minimization;
+    end Evaluation;
     Result : Integer;
 begin
-    --Result := Minimization(-4);
-    --Ada.Text_IO.Put_Line("I am finally best" & Integer'Image(Result));
-    Result := Hill_Climb.Climb(Minimization'Access, -6, 2);
+    Result := Hill_Climb.Climb(Evaluation'Access, -4, 2);
+    Ada.Text_IO.Put_Line("I am finally best " & Integer'Image(Result));
 end Hill_Climb_Test;

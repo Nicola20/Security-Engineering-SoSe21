@@ -1,7 +1,8 @@
 --------------------------------------------------------------
 -- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
 --          Lucas Hübner (116232)
--- Description: Declarations for the hill climbing algorithm
+-- Description: Declarations for the hill climbing algorithm,
+--              finding the point with the min value.
 --------------------------------------------------------------
 
 package Hill_Climb is
