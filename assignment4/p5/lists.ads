@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Lists baby
+--------------------------------------------------------------
+
 generic
     type Item_Type is private;
 package Lists is
