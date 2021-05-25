@@ -1,4 +1,5 @@
 with Lists, Ada.Unchecked_Deallocation;
+
 package body Lists is
 
     function First(List: List_Type) return List_Iterator_Type is
@@ -15,7 +16,7 @@ package body Lists is
         if List.List.Count < 1 then
             raise Iterator_Error;
         else
-            return (List => List.List, Current => null);
+            return (List => List.List, Current => List.List.Last);
         end if;
     end Last;
 
@@ -57,25 +58,19 @@ package body Lists is
     end Create_List;
 
     procedure Append(List: List_Type; Item: Item_Type) is
-        New_Entry : Item_Access;
+        Iterator : List_Iterator_Type;
     begin
-        New_Entry := new Item_Record;
-        New_Entry.Value := Item;
-        New_Entry.Next := null;
-        New_Entry.Prev := List.List.Last;
-        List.List.Last.Next := New_Entry;
-        List.List.Last := New_Entry;
+        Iterator.List := List.List;
+        Iterator.Current := null;
+        Insert(Iterator, Item);
     end Append;
 
     procedure Prepend(List: List_Type; Item: Item_Type) is
-        New_Entry : Item_Access;
+        Iterator : List_Iterator_Type;
     begin
-        New_Entry := new Item_Record;
-        New_Entry.Value := Item;
-        New_Entry.Prev := null;
-        New_Entry.Next := List.List.First;
-        List.List.First.Prev := New_Entry;
-        List.List.First := New_Entry;
+        Iterator.List := List.List;
+        Iterator.Current := List.List.First;
+        Insert(Iterator, Item);
     end Prepend;
 
     procedure Insert(Iterator: in out List_Iterator_Type; Item: Item_Type) is 
