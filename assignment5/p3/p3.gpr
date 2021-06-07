@@ -1,0 +1,26 @@
+project p3 is
+
+ for Object_Dir use "./bin";
+   for Source_Dirs use ("./src");
+   for Main use ("elections_test.adb");
+
+   Mode := External("GPR_TOOLS","");
+
+   package Prove is
+      for Proof_Switches ("Ada") use ("--report=all");
+   end Prove;
+
+   package Compiler is
+      case Mode is
+         when "gnatprove" =>
+            for Switches ("Ada") use ("-gnato13");
+         when others =>
+            for Switches ("Ada") use ("-gnato13");
+      end case;
+   end Compiler;
+
+   package Builder is
+      for Default_Switches("Ada") use ("-gnato13");
+   end Builder;
+
+end p3;
