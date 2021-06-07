@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Lucas Hübner (116232),
+-- Philipp Tornow (118332)
+-- Description: Thread package definition
+--------------------------------------------------------------
+
 package body Thread
     with SPARK_Mode => On
 is

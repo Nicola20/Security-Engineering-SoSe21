@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Lucas Hübner (116232),
+-- Philipp Tornow (118332)
+-- Description: Elections package declaration with Proves
+--------------------------------------------------------------
+
 package Elections is
     type Party is (None, A, B, C, D);
     type Votes_Array is array(Party) of Natural;

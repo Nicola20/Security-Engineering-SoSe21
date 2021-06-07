@@ -1,5 +1,8 @@
-with Ada.Text_IO;
-use Ada.Text_IO;
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Lucas Hübner (116232),
+-- Philipp Tornow (118332)
+-- Description: Elections package definition
+--------------------------------------------------------------
 
 package body Elections is
 
