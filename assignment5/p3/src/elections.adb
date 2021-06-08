@@ -4,7 +4,9 @@
 -- Description: Elections package definition
 --------------------------------------------------------------
 
-package body Elections is
+package body Elections
+    with SPARK_Mode => On
+is
 
 procedure Initialize(Num_Voters: Natural) is
 begin
@@ -28,6 +30,7 @@ function Find_Winner return Party is
 potWinner : Party;
 equalNumVotes : Natural;
 begin
+    equalNumVotes := 0;
     potWinner := None;
     for p in Votes_Distribution'Range loop
         if Votes_Distribution(p) > Votes_Distribution(potWinner) then
