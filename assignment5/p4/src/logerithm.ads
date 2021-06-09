@@ -1,3 +1,9 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Lucas Hübner (116232),
+-- Philipp Tornow (118332)
+-- Description: Log
+--------------------------------------------------------------
+
 package Logerithm with
    SPARK_Mode => On
 is
