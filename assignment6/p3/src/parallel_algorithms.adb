@@ -1,0 +1,40 @@
+--------------------------------------------------------------
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: Body of package that computes the sum of all
+--				elements inside an array in parallel.
+--------------------------------------------------------------
+with Ada.Text_IO;
+package body Parallel_Algorithms is
+
+	procedure Parallel_Sum(Input: Array_Access_Type; Result: out Item_Type) is
+
+		task type Parallel_Task() is 
+			entry Addition(From: Natural; To: Natural);
+			entry Sum(Partial_Result: out Item_Type);
+		end Parallel_Task;
+
+		task body Parallel_Task is
+			Total: Item_Type;
+		begin
+			accept Addition(From: Natural; To: Natural) do
+				Total := Input(From);
+				for I in (From + 1)..To loop
+					Total := Total + Input(I);
+				end loop;
+			end Addition;
+			accept Sum(Partial_Result: out Item_Type) do
+				Partial_Result := Total;
+			end Sum;
+		end Parallel_Task;
+
+		T1 : Parallel_Task;
+		T2 : Parallel_Task;
+		R1 : Item_Type;
+		R2 : Item_Type;
+		-- Compute the middle index of the array
+		--Middle : constant Integer := ;
+	begin
+	end Parallel_Sum;
+
+end Parallel_Algorithms;
