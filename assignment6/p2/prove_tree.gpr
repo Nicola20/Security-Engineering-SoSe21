@@ -1,0 +1,40 @@
+project Prove_Tree is
+
+   type Modes is ("Compile", "Analyze");
+   Mode : Modes := External ("MODE", "Compile");
+
+   for Main use ("tree_test.adb");
+   for Source_Dirs use ("src");
+   for Object_Dir use "bin";
+
+   package Compiler is
+      case Mode is
+         when "Compile" =>
+            for Switches ("Ada") use ("-g", "-gnato", "-gnatwa", "-gnatQ",
+               "-gnat12");
+         when "Analyze" =>
+            for Switches ("Ada") use ("-g", "-j2", "-gnato", "-gnatwa",
+               "-gnatQ", "-gnat12", "-gnato13");
+      end case;
+   end Compiler;
+
+   package Prove is
+       for Proof_Switchesi ("Ada") use ("--report=all",
+                         "--proof=progressive",
+                         "--warnings=continue",
+                         "--timeout=5",
+                         "--mode=all",
+                         "--flow-debug",
+                         "-d");
+   end Prove;
+
+   package Builder is
+      for Default_Switches ("ada") use ();
+   end Builder;
+
+   package Ide is
+      for Compiler_Command ("ada") use "gnatmake";
+      for Compiler_Command ("c") use "gcc";
+   end Ide;
+
+end Prove_Tree;
