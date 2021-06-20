@@ -1,9 +1,9 @@
-with Coffee_Tests;
+with Parallel_Sum_Tests;
 
 package body Test_Suite is
 
     Result: aliased AUnit.Test_Suites.Test_Suite;
-    Test: aliased Coffee_Tests.Test;
+    Test: aliased Parallel_Sum_Tests.Test;
 
 	function Suite return Access_Test_Suite is
 	begin
