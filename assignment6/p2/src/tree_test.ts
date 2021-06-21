@@ -85,5 +85,5 @@ test    Value := 42;
         Delete_Right(Root);
         Put_line("Deleted Right.");
         Tree.Put(Root);
-pass    (Root.Left_Child.Value = Value1) AND (Root.Right_Child = null)
+pass    (Root.Right_Child = null) AND (Root.Left_Child.Value = Value1)
 

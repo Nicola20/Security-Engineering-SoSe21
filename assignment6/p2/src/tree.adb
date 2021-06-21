@@ -15,23 +15,19 @@ package TEXTIO renames Ada.Text_IO;
 procedure Delete_Node is new Ada.Unchecked_Deallocation(Node_Type, Node_Access);
 
 procedure Put(Node: access constant Node_Type) is
-    PrintValue : Integer;
-    LeftNode : Node_Access;
-    RightNode : Node_Access;
+    -- maby unnecessary, because the parameter is an observer itself?
+    NodeObserver : access constant Node_Type:= Node;
 begin
-    LeftNode := Node.Left_Child;
-    RightNode := Node.Right_Child;
-    PrintValue := Node.Value;
-    if LeftNode /= null then
-        Put(LeftNode);
+    if NodeObserver.Left_Child /= null then
+        Put(NodeObserver.Left_Child);
     end if;
-    TEXTIO.Put(PrintValue'image);
-    if RightNode /= null then
-        Put(RightNode);
+    TEXTIO.Put(NodeObserver.Value'image);
+    if NodeObserver.Right_Child /= null then
+        Put(NodeObserver.Right_Child);
     end if;
 end Put;
 
-function Create_Root(Value : Integer) return Node_Access is
+function Create_Root(Value : Integer) return not null Node_Access is
     Root: Node_Access;
 begin
     Root := new Node_Type'(null, null, Value);
@@ -43,6 +39,7 @@ begin
     if Node.Left_Child = null then
         Node.Left_Child := new Node_Type'(null, null, Value);
     else
+        --recursive call
         Add_Left(Node.Left_Child, Value);
     end if;
 end Add_Left;
@@ -57,35 +54,15 @@ begin
 end Add_Right;
 
 procedure Delete_Right(Node : Node_Access) is
-    RightNode : Node_Access;
+-- borrower of Node was marked by the compiler warning as unneccessary
 begin
-    RightNode := Node.Right_Child;
-    if RightNode /= null then
-        if RightNode.Left_Child /= null then
-            Delete_Left(RightNode.Left_Child);
-        end if;
-
-        if RightNode.Right_Child /= null then
-            Delete_Right(RightNode.Right_Child);
-        end if;
-        Delete_Node(Node.Right_Child);
-    end if;
+    -- No explicit borrower allowed, because when we set the borrower as Left or Right child, the borrower never gets out of scope
+    Delete_Node(Node.Right_Child);
 end Delete_Right;
 
 procedure Delete_Left(Node : Node_Access) is
-    LeftNode : Node_Access;
 begin
-    LeftNode := Node.Left_Child;
-    if LeftNode /= null then
-        if LeftNode.Left_Child /= null then
-            Delete_Left(LeftNode.Left_Child);
-        end if;
-
-        if LeftNode.Right_Child /= null then
-            Delete_Right(LeftNode.Right_Child);
-        end if;
-        Delete_Node(Node.Left_Child);
-    end if;
+    Delete_Node(Node.Left_Child);
 end Delete_Left;
 
 end Tree;
