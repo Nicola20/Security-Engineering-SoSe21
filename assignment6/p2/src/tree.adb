@@ -56,7 +56,6 @@ end Add_Right;
 procedure Delete_Right(Node : Node_Access) is
 -- borrower of Node was marked by the compiler warning as unneccessary
 begin
-    -- No explicit borrower allowed, because when we set the borrower as Left or Right child, the borrower never gets out of scope
     Delete_Node(Node.Right_Child);
 end Delete_Right;
 
