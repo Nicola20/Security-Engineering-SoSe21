@@ -41,10 +41,10 @@ package body Parallel_Sum_Tests is
         use AUnit.Test_Cases.Registration;
     begin
         Register_Routine(T, Test_Complete_Sum_Natural'Access, 
-            "Test sum of array with positive integers");
+            "Test sum of array with naturals");
         Register_Routine(T, Test_Complete_Sum_Integer'Access, 
             "Test sum of array with integers");
-  
+
     end Register_Tests;
 
     ------------------------------------------------------------------
