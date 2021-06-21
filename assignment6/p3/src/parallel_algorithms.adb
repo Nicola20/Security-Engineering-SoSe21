@@ -4,8 +4,7 @@
 -- Description: Body of package that computes the sum of all
 --				elements inside an array in parallel.
 --------------------------------------------------------------
-with Ada.Text_IO;
-use Ada.Text_IO;
+
 package body Parallel_Algorithms is
 
 	procedure Parallel_Sum(Input: Array_Access_Type; Result: out Item_Type) is
@@ -23,7 +22,6 @@ package body Parallel_Algorithms is
 				for I in (From + 1)..To loop
 					Total := Total + Input(I);
 				end loop;
-				Put_Line("I am end");
 			end Addition;
 			accept Sum(Partial_Result: out Item_Type) do
 				Partial_Result := Total;
