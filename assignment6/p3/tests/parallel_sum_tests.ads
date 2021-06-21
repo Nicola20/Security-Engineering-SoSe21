@@ -17,6 +17,7 @@ package Parallel_Sum_Tests is
 	
     procedure Test_Complete_Sum_Integer(T : in out Test_Cases.Test_Case'Class);
     procedure Test_Complete_Sum_Natural(T : in out Test_Cases.Test_Case'Class);
+	procedure Test_Small_Array(T : in out Test_Cases.Test_Case'Class);
 
 	procedure Register_Tests(T: in out Test);
 	function Name(T: Test) return Test_String;

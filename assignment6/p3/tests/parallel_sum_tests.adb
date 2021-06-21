@@ -18,6 +18,7 @@ package body Parallel_Sum_Tests is
         use P; 
         Result : Item_Type;
         Test_Array : aliased Array_Type := (2, 3, 7, 10, 20, 4, 9);
+        --Test_Array : aliased Array_Type := (1, 2);
     begin
         Parallel_Sum(Test_Array'Access, Result);
         Assert((Result = 55), "Sum of positive numbers failed.");
@@ -37,6 +38,19 @@ package body Parallel_Sum_Tests is
     end Test_Complete_Sum_Integer;
 
 
+    procedure Test_Small_Array(T : in out Test_Cases.Test_Case'Class) is
+        pragma Unreferenced (T);
+        subtype Item_Type is Natural;
+        package P is new Parallel_Algorithms(Item_Type, "+");
+        use P; 
+        Result : Item_Type;
+        Test_Array : aliased Array_Type := (1, 2);
+    begin
+        Parallel_Sum(Test_Array'Access, Result);
+        Assert((Result = 3), "Sum of array with two elements failed");
+    end Test_Small_Array;
+
+
     procedure Register_Tests(T: in out Test) is
         use AUnit.Test_Cases.Registration;
     begin
@@ -44,6 +58,8 @@ package body Parallel_Sum_Tests is
             "Test sum of array with naturals");
         Register_Routine(T, Test_Complete_Sum_Integer'Access, 
             "Test sum of array with integers");
+        Register_Routine(T, Test_Small_Array'Access, 
+            "Test sum of array containing two elements");
 
     end Register_Tests;
 
