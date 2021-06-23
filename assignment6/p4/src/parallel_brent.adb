@@ -1,3 +1,8 @@
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: le parallel brent
+--------------------------------------------------------------
+
 with Parallel_brent;
 with Ada.Numerics.Discrete_Random;
 with Ada.Calendar; use Ada.Calendar;

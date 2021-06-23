@@ -1,3 +1,8 @@
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: le parallel brent
+--------------------------------------------------------------
+
 with GNAT.SHA1;
 With Ada.Text_IO;
 with Brent_context;

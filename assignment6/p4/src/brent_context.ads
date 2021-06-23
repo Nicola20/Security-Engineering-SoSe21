@@ -1,3 +1,8 @@
+-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+--          Lucas Hübner (116232)
+-- Description: le parallel brent
+--------------------------------------------------------------
+
 generic
     Num_Colliding_Bits: Natural;
     Num_State_Bits: Natural; -- 160 for SHA-1
