@@ -102,7 +102,6 @@ package body Parallel_Brent is
             First := Tortoise;
             Second := Hare;
          else
-            force_quit := True;
             raise No_collision_found with
               "Failed to find collision. Initial value must have been in a cycle";
          end if;
@@ -151,7 +150,7 @@ package body Parallel_Brent is
          if force_quit then
             Abort_Task(Quit_Duration'Identity);
             Abort_Task(Quit_Button'Identity);
-            raise No_collision_found with "Force quit.";
+            raise No_collision_found with "Force quit due to time or q-key";
          elsif collision_detected then
             Abort_Task(Quit_Duration'Identity);
             Abort_Task(Quit_Button'Identity);
