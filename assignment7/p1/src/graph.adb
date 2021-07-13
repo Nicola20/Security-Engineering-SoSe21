@@ -132,5 +132,27 @@ package body Graph is
 		end if;
 	end To_Edge_Array;
 
+	procedure Put_Vert(Vert : in Vertex_Type) is
+	begin
+		Ada.Text_IO.Put(Vert'Image);
+	end Put_Vert;
+
+	procedure Put_Edge(Edge : in Edge_Type) is
+	begin
+		Ada.Text_IO.Put("(" & Edge.From'Image & "," & Edge.To'Image & "," & Edge.Weight'Image & ")");
+	end Put_Edge;
+
+	function Get_Index_Of(Vert : in Vertex_Type) return Integer is
+		Result : Integer := -1;
+	begin
+		if not (Vertices.Is_Empty) then
+			for I in Vertices.First_Index..Vertices.Last_Index loop
+				if Vertices(I) = Vert then
+					Result := Integer(I);
+				end if;
+			end loop;
+		end if;
+		return Result;
+	end Get_Index_Of;
 
 end Graph;

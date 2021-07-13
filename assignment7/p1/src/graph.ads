@@ -49,6 +49,13 @@ package Graph is
 	-- Returns an array containing exactly all current vertices of the graph.
 	function To_Edge_Array return Edge_Array;
 	-- Returns an array containing exactly all current edges of the graph.
+	procedure Put_Vert(Vert : in Vertex_Type);
+	procedure Put_Edge(Edge : in Edge_Type);
+
+	function Get_Index_Of(Vert : in Vertex_Type) return Integer;
+	-- Returns the index of an unique vertex, -1 if not doesn't exist
+	-- needed for union find, due to Generic declaration to allow any type
+
 
 private
 

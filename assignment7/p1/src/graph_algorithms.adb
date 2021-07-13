@@ -14,23 +14,58 @@ package body Graph_Algorithms is
     -- minimal spanning tree; otherwise, Result will hold the minimal spanning
     -- forest.
     procedure Find_Min_Spanning_Tree(Result: out Edge_Array_Access) is
-        Graph_Vertices_Array: Vertex_Array := To_Vertex_Array; --convert to vertex array
-        Graph_Edges_Array: Edge_Array := To_Edge_Array; --convert to edge array
+        Graph_Vertices_Array: Vertex_Array_Access := new Vertex_Array'(To_Vertex_Array); --convert to vertex array access
+        Graph_Edges_Array: Edge_Array_Access := new Edge_Array'(To_Edge_Array); --convert to vertex array access
+
+        Subsets : Subset_Array(0..Graph_Vertices_Array.all'Length);
+        A : Natural;
+        B : Natural;
 
     begin
-        if Graph_Vertices_Array'Length = 0 then
+        if Graph_Vertices_Array.all'Length = 0 then
             Result := new Edge_Array(1..0);
         else
-            if not (Graph_Edges_Array'Length = 0) then
-                Sort(Graph_Edges_Array); --sort vertices according to their weight
+            if not (Graph_Edges_Array.all'Length = 0) then
+                -- sort vertices according to their weight
+                Sort(Graph_Edges_Array.all);
 
-                for E in Graph_Edges_Array'Range loop
-                   Put_Line(Graph_Edges_Array(E).Weight'Image);
+                -- initialize subsets / setting parents and rank for union find
+                for S in Subsets'Range loop
+                   Subsets(S).ParentIndex := S;
+                   Subsets(S).Rank := 0;
                 end loop;
+
+                -- itterate over all edges and try to include them in a subset to
+                New_Line(1);
+                Put_Line("Minimal Spanning Tree/Forest:");
+                for E in Graph_Edges_Array.all'Range loop
+                    -- get subsets (compressed tree) for each vertex of an edge
+                    A := find(Subsets, Get_Index_Of(Graph_Edges_Array.all(E).From));
+                    B := find(Subsets, Get_Index_Of(Graph_Edges_Array.all(E).To));
+
+                    -- circle criteria is that no edge/vertex has the same representative / root
+                    if not (A = B) then
+                        Union(Subsets, A, B);
+                        Put_Edge(Graph_Edges_Array.all(E));
+                        New_Line(1);
+                        Result_Vector.Append(Graph_Edges_Array.all(E));
+                   end if;
+                end loop;
+
+                -- construct result
+                Result := new Edge_Array(Result_Vector.First_Index..Result_Vector.Last_Index);
+                for R in Result_Vector.First_Index..Result_Vector.Last_Index loop
+                    Result.all(R) := Result_Vector(R);
+                end loop;
+                Result_Vector.Clear;
+                Put_Line("---------------");
             else
                 Result := new Edge_Array(1..0);
             end if;
         end if;
+
+        Free_Vertices(Graph_Vertices_Array);
+        Free_Edges(Graph_Edges_Array);
     end Find_Min_Spanning_Tree;
 
     -- sorting function according to the weight
@@ -41,26 +76,26 @@ package body Graph_Algorithms is
 
     -- inspired by https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/ 08.07.21
     -- union find algorithm to determine circles
-    procedure Union(Subs : in out Subset_Array; Xroot : Natural; Yroot : Natural) is
+    procedure Union(Subs : in out Subset_Array; ARootIndex : Natural; BRootIndex : Natural) is
     begin
-        if Subs(Xroot).Rank < Subs(Yroot).Rank then
-            Subs(Xroot).Parent := Yroot;
-        elsif Subs(Xroot).Rank > Subs(Yroot).Rank then
-            Subs(Yroot).Parent := Xroot;
+        if Subs(ARootIndex).Rank < Subs(BRootIndex).Rank then
+            Subs(ARootIndex).ParentIndex := BRootIndex;
+        elsif Subs(ARootIndex).Rank > Subs(BRootIndex).Rank then
+            Subs(BRootIndex).ParentIndex := ARootIndex;
         else
-            Subs(Yroot).Parent := Xroot;
-            Subs(Yroot).Rank := Subs(Yroot).Rank + 1;
+            Subs(BRootIndex).ParentIndex := ARootIndex;
+            Subs(BRootIndex).Rank := Subs(BRootIndex).Rank + 1;
         end if;
 
     end Union;
 
     function Find(Subs : in out Subset_Array; Idx : Natural) return Natural is
-        Result : Natural;
+        Result : Vertex_Type;
     begin
-        if not (Subs(Idx).Parent = Idx) then
-            Subs(Idx).Parent := Find(Subs, Subs(Idx).Parent);
+        if not (Subs(Idx).ParentIndex = Idx) then
+            Subs(Idx).ParentIndex := Find(Subs, Subs(Idx).ParentIndex);
         end if;
-        return Subs(Idx).parent;
+        return Subs(Idx).ParentIndex;
     end Find;
 
 

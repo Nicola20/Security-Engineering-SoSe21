@@ -1,5 +1,6 @@
 with Ada.Unchecked_Deallocation;
 with Ada.Containers.Generic_Array_Sort;
+with Ada.Containers.Vectors;
 with Graph;
 
 generic
@@ -15,7 +16,7 @@ package Graph_Algorithms is
     procedure Free_Vertices is new Ada.Unchecked_Deallocation(
         Vertex_Array, Vertex_Array_Access);
 
-    procedure Free_Vertices is new Ada.Unchecked_Deallocation(
+    procedure Free_Edges is new Ada.Unchecked_Deallocation(
         Edge_Array, Edge_Array_Access);
 
     -- Implements Dijkstra’s shortest-path algorithm in the given graph with
@@ -33,7 +34,7 @@ package Graph_Algorithms is
     private
 
         type Subset is record
-           Parent : Natural;
+           ParentIndex : Natural;
            Rank : Integer;
         end record;
 
@@ -47,7 +48,14 @@ package Graph_Algorithms is
         );
 
         -- using Union-Find in O(log n) to determine if a cycle exists
-        procedure Union(Subs : in out Subset_Array; Xroot : Natural; Yroot : Natural);
+        procedure Union(Subs : in out Subset_Array; ARootIndex : Natural; BRootIndex : Natural);
         function Find(Subs : in out Subset_Array; Idx : Natural) return Natural;
+
+        package Result_Vectors is new Ada.Containers.Vectors(
+            Element_Type => Edge_Type,
+            Index_Type => Natural);
+        use Result_Vectors;
+        Result_Vector: Result_Vectors.Vector;
+        -- result vectors to itterativly push elements to the result
 
 end Graph_Algorithms;

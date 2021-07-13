@@ -170,18 +170,16 @@ begin  -- unit main block
     Put_line("Test Kruskal Algorithm.");
   end;  -- code block
 
-  -- Test Case (2)   (2) Test Kruskal Algorithm with Testgraph
+  -- Test Case (2)   (2) Test Kruskal Algorithm with connected Testgraph
   declare
     subtype Vertex_Type is Integer;
     package Test_Graph is new Graph(Vertex_Type, "=");
     use Test_Graph;
     package Graph_Algorithms_Instance is new Graph_Algorithms(Vertex_Type, "=", Test_Graph);
     use Graph_Algorithms_Instance;
-    Result : Boolean;
     Result_Spanning_Tree : Edge_Array_Access;
   begin  -- test case
     begin  -- test part
-      Result := true;
       Add_Vertex(1);
       Add_Vertex(2);
       Add_Vertex(3);
@@ -212,14 +210,20 @@ begin  -- unit main block
     end;  -- test part
     begin  -- result part
       if Driver_Internals.Path_Was ("=>") then
-        if (Result)
+        if (Result_Spanning_Tree.all(0).Weight = 2)
+           AND (Result_Spanning_Tree.all(1).Weight = 2)
+           AND (Result_Spanning_Tree.all(2).Weight = 3)
+           AND (Result_Spanning_Tree.all(3).Weight = 3)
+           AND (Result_Spanning_Tree.all(4).Weight = 4)
+           AND (Result_Spanning_Tree.all(5).Weight = 5)
+           AND (Result_Spanning_Tree.all(6).Weight = 5)
         then
           Driver_Internals.Test_Case_Passed := True;
           Put_Line ("(2)  pass.");
         else
           Driver_Internals.Test_Case_Passed := False;
           Driver_Internals.Fail_Result := True;
-          Put_Line ("(2)  (2) Test Kruskal Algorithm with Testgraph");
+          Put_Line ("(2)  (2) Test Kruskal Algorithm with connected Testgraph");
           Put_Line ("           Script name:'graphalg_test_tg.ts'; Line:72 ");
           Put_Line ("      ...FAIL.");
           Put_Line ("         (" & "path `=>' was taken, but predicate is FALSE" & ")");
@@ -227,7 +231,7 @@ begin  -- unit main block
       else
         Driver_Internals.Test_Case_Passed := False;
         Driver_Internals.Fail_Result := True;
-        Put_Line ("(2)  (2) Test Kruskal Algorithm with Testgraph");
+        Put_Line ("(2)  (2) Test Kruskal Algorithm with connected Testgraph");
         Put_Line ("           Script name:'graphalg_test_tg.ts'; Line:72 ");
         Put_Line ("      ...FAIL.");
         Put_Line ("         (" & "path `" & Driver_Internals.Taken_Path & "' when `=>' was expected" & ")");

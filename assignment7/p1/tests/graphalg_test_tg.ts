@@ -69,17 +69,15 @@ pass (Graph_Vertices_Array'Length = 8)
 
 code    Put_line("Test Kruskal Algorithm.");
 
-***** (2) Test Kruskal Algorithm with Testgraph
+***** (2) Test Kruskal Algorithm with connected Testgraph
 define
         subtype Vertex_Type is Integer;
         package Test_Graph is new Graph(Vertex_Type, "=");
         use Test_Graph;
         package Graph_Algorithms_Instance is new Graph_Algorithms(Vertex_Type, "=", Test_Graph);
         use Graph_Algorithms_Instance;
-        Result : Boolean;
         Result_Spanning_Tree : Edge_Array_Access;
 test
-        Result := true;
         Add_Vertex(1);
         Add_Vertex(2);
         Add_Vertex(3);
@@ -105,4 +103,11 @@ test
         Add_Edge(7,8,2);
 
         Find_Min_Spanning_Tree(Result_Spanning_Tree);
-pass    (Result)
+
+pass        (Result_Spanning_Tree.all(0).Weight = 2)
+        AND (Result_Spanning_Tree.all(1).Weight = 2)
+        AND (Result_Spanning_Tree.all(2).Weight = 3)
+        AND (Result_Spanning_Tree.all(3).Weight = 3)
+        AND (Result_Spanning_Tree.all(4).Weight = 4)
+        AND (Result_Spanning_Tree.all(5).Weight = 5)
+        AND (Result_Spanning_Tree.all(6).Weight = 5)
