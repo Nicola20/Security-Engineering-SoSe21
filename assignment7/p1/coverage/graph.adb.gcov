@@ -1,0 +1,126 @@
+        -:    0:Source:/mnt/c/wsl_share/1_FS_Master/Security_Engineering/Security-Engineering-SoSe21/assignment7/p1/src/graph.adb
+        -:    0:Graph:/mnt/c/wsl_share/1_FS_Master/Security_Engineering/Security-Engineering-SoSe21/assignment7/p1/bin/graphalg_test_tg.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:--------------------------------------------------------------
+        -:    2:-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+        -:    3:--          Lucas Hübner (116232)
+        -:    4:-- Description: Body of the graph package
+        -:    5:--------------------------------------------------------------
+        -:    6:with Ada.Text_IO;
+        -:    7:package body Graph is
+        -:    8:
+    #####:    9:	procedure Add_Vertex(Vertex: Vertex_Type) is
+        -:   10:	begin
+    #####:   11:		if Vertices.Find(Vertex) = Vertex_Vectors.No_Element then
+    #####:   12:			Ada.Text_IO.Put_Line("Added vertex");
+    #####:   13:			Vertices.Append(Vertex);
+        -:   14:		else
+    #####:   15:			raise Vertex_Already_In_Graph_Exception;
+        -:   16:		end if;
+    #####:   17:	end Add_Vertex;
+        -:   18:
+        -:   19:
+    #####:   20:	procedure Add_Edge(From: Vertex_Type; To: Vertex_Type; Weight: Integer) is
+    #####:   21:		New_Edge: constant Edge_Type := (From, To, Weight);
+    #####:   22:		Edge_Already_Exists: Boolean := False;
+        -:   23:	begin
+    #####:   24:		if Vertices.Find(From) = Vertex_Vectors.No_Element or
+    #####:   25:			Vertices.Find(To) = Vertex_Vectors.No_Element then
+    #####:   26:			raise Vertex_Not_In_Graph_Exception;
+        -:   27:		else
+    #####:   28:			if not Edges.Is_Empty then
+    #####:   29:				for E of Edges loop
+    #####:   30:					if E.From = From and E.To = To then
+    #####:   31:						Ada.Text_IO.Put_Line("Added New Weight to already existing edge");
+    #####:   32:						E.Weight := Weight;
+    #####:   33:						Edge_Already_Exists := True;
+    #####:   34:						exit;
+        -:   35:					end if;
+        -:   36:				end loop;
+    #####:   37:				if Edge_Already_Exists = False then
+    #####:   38:					Edges.Append(New_Edge);
+    #####:   39:					Ada.Text_IO.Put_Line("Added New Edge");
+        -:   40:				end if;
+        -:   41:			else
+    #####:   42:				Edges.Append(New_Edge);
+    #####:   43:				Ada.Text_IO.Put_Line("Added New Edge");
+        -:   44:			end if;
+        -:   45:		end if;
+    #####:   46:	end Add_Edge;
+        -:   47:
+        -:   48:
+        -:   49:	procedure Clear is
+        -:   50:	begin
+        -:   51:	-- Removes all vertices and edges from the graph.
+        -:   52:		Vertices.Clear;
+        -:   53:		Edges.Clear;
+        -:   54:		Ada.Text_IO.Put_Line("Cleared all");
+        -:   55:	end Clear;
+        -:   56:
+        -:   57:
+        -:   58:	function Get_Edge_Weight(From: Vertex_Type; To: Vertex_Type) return Integer is
+        -:   59:	begin
+        -:   60:		if not Edges.Is_Empty then
+        -:   61:			for E of Edges loop
+        -:   62:				if E.From = From and E.To = To then
+        -:   63:					Ada.Text_IO.Put_Line(Integer'Image(E.Weight));
+        -:   64:					return E.Weight;
+        -:   65:				end if;
+        -:   66:			end loop;
+        -:   67:			raise Edge_Not_Found_Exception;
+        -:   68:		else
+        -:   69:			raise Edge_Not_Found_Exception;
+        -:   70:		end if;
+        -:   71:	end Get_Edge_Weight;
+        -:   72:
+        -:   73:
+    #####:   74:	function Has_Edge(From: Vertex_Type; To: Vertex_Type) return Boolean is
+        -:   75:	begin
+    #####:   76:		if not Edges.Is_Empty then
+    #####:   77:			for E of Edges loop
+    #####:   78:				if E.From = From and E.To = To then
+    #####:   79:					Ada.Text_IO.Put_Line("Edge is inside graph");
+    #####:   80:					return True;
+        -:   81:				end if;
+        -:   82:			end loop;
+    #####:   83:			Ada.Text_IO.Put_Line("Edge is not inside graph");
+    #####:   84:			return False;
+        -:   85:		else
+    #####:   86:			Ada.Text_IO.Put_Line("Edge is not inside graph");
+    #####:   87:			return False;
+        -:   88:		end if;
+        -:   89:	end Has_Edge;
+        -:   90:
+        -:   91:
+        -:   92:	function Remove_Edge(From: Vertex_Type; To: Vertex_Type) return Boolean is
+        -:   93:	begin
+        -:   94:		if not Edges.Is_Empty then
+        -:   95:			for I in Edges.First_Index..Edges.Last_Index loop
+        -:   96:				if Edges.Element(I).From = From and Edges.Element(I).To = To then
+        -:   97:					Edges.Delete(I);
+        -:   98:					Ada.Text_IO.Put_Line("Deleted Edge");
+        -:   99:					return True;
+        -:  100:				end if;
+        -:  101:			end loop;
+        -:  102:			raise Edge_Not_Found_Exception;
+        -:  103:		else
+        -:  104:			raise Edge_Not_Found_Exception;
+        -:  105:		end if;
+        -:  106:	end Remove_Edge;
+        -:  107:
+        -:  108:
+    #####:  109:	function To_Vertex_Array return Vertex_Array is
+    #####:  110:		Graph_Vertices: Vertex_Array(0..Natural(Integer(Vertices.Length))-1);
+        -:  111:	begin
+    #####:  112:		if Vertices.Is_Empty then
+    #####:  113:			return Graph_Vertices;
+        -:  114:		else
+    #####:  115:			for I in Graph_Vertices'Range loop
+    #####:  116:				Graph_Vertices(I) := Vertices.Element(I);
+    #####:  117:			end loop;
+    #####:  118:			return Graph_Vertices;
+        -:  119:		end if;
+    #####:  120:	end To_Vertex_Array;
+        -:  121:
+        -:  122:end Graph;

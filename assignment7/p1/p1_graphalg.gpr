@@ -1,0 +1,26 @@
+
+project p1_graphalg is
+
+   --for Main use ("graphalg_tests_tg.adb");
+   for Main use ("graphalg_test_tg.adb");
+   for Source_Dirs use ("src", "tests");
+   for Object_Dir use "bin";
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-fprofile-arcs", "-ftest-coverage","-lgcov","-g", "-gnato", "-gnatwa", "-gnatQ", "-gnato", "-gnata", "-gnat12");
+   end Compiler;
+
+   package Builder is
+      for Default_Switches ("ada") use ();
+   end Builder;
+
+   package Linker is
+      for Default_Switches ("ada") use ("-fprofile-arcs");
+   end Linker;
+
+   package Ide is
+      for Compiler_Command ("ada") use "gnatmake";
+      for Compiler_Command ("c") use "gcc";
+   end Ide;
+
+end p1_graphalg;

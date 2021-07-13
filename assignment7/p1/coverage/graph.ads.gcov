@@ -1,0 +1,67 @@
+        -:    0:Source:/mnt/c/wsl_share/1_FS_Master/Security_Engineering/Security-Engineering-SoSe21/assignment7/p1/src/graph.ads
+        -:    0:Graph:/mnt/c/wsl_share/1_FS_Master/Security_Engineering/Security-Engineering-SoSe21/assignment7/p1/bin/graphalg_test_tg.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:-- ------------------------------------------------------------
+        -:    2:-- Authors: Nicola Lea Libera (117073), Philipp Tornow (118332)
+        -:    3:--          Lucas Hübner (116232)
+        -:    4:-- Description: Package specification for graph package
+        -:    5:-- ------------------------------------------------------------
+        -:    6:
+        -:    7:with Ada.Containers.Vectors;
+        -:    8:
+        -:    9:generic
+        -:   10:	type Vertex_Type is private;
+        -:   11:	with function "="(Left: Vertex_Type; Right: Vertex_Type) return Boolean;
+        -:   12:package Graph is
+    #####:   13:	Edge_Not_Found_Exception: exception;
+    #####:   14:	Vertex_Already_In_Graph_Exception: exception;
+    #####:   15:	Vertex_Not_In_Graph_Exception: exception;
+        -:   16:
+        -:   17:	type Edge_Type is private;
+        -:   18:	type Vertex_Array is array(Natural range <>) of Vertex_Type;
+        -:   19:
+        -:   20:	procedure Add_Vertex(Vertex: Vertex_Type);
+        -:   21:	-- Stores the Vertex in the Graph. Raises a
+        -:   22:	-- Vertex_Already_In_Graph_Exception if it is already in the graph.
+        -:   23:	procedure Add_Edge(From: Vertex_Type; To: Vertex_Type; Weight: Integer);
+        -:   24:	-- Stores a new edge in the Graph from From to To that has the given
+        -:   25:	-- Weight assigned to it . If an edge from From to To is already stored
+        -:   26:	-- in the Graph, this function only re-assigns the given Weight to it
+        -:   27:	-- and does nothing beyond.
+        -:   28:	-- Before storing it the existence of the two vertices inside the graph
+        -:   29:	-- is checked. If one or both do not exist, an Vertex_Not_In_Graph_Exception
+        -:   30:	-- is raised.
+        -:   31:	procedure Clear;
+        -:   32:	-- Removes all vertices and edges from the graph.
+        -:   33:	function Get_Edge_Weight(From: Vertex_Type; To: Vertex_Type) return Integer;
+        -:   34:	-- Returns the weight of the edge , if it is stored in the graph.
+        -:   35:	-- Raises an Edge_Not_Found_Exception otherwise.
+        -:   36:	function Has_Edge(From: Vertex_Type; To: Vertex_Type) return Boolean;
+        -:   37:	-- Returns True if an edge from From to To is stored in the graph.
+        -:   38:	-- Returns False otherwise.
+        -:   39:	function Remove_Edge(From: Vertex_Type; To: Vertex_Type) return Boolean;
+        -:   40:	-- Removes the edge in the Graph from From to To, if existing;
+        -:   41:	-- Raises an Edge_Not_Found_Exception otherwise.
+        -:   42:	function To_Vertex_Array return Vertex_Array;
+        -:   43:	-- Returns an array containing exactly all current vertices of the graph.
+        -:   44:private
+        -:   45:	type Edge_Type is record
+        -:   46:		From: Vertex_Type;
+        -:   47:		To: Vertex_Type;
+        -:   48:		Weight: Integer := 0;
+        -:   49:	end record;
+        -:   50:
+        -:   51:	package Edge_Vectors is new Ada.Containers.Vectors(
+        -:   52:		Element_Type => Edge_Type,
+        -:   53:		Index_Type => Natural);
+        -:   54:	package Vertex_Vectors is new Ada.Containers.Vectors(
+        -:   55:		Element_Type => Vertex_Type,
+        -:   56:		Index_Type => Natural);
+        -:   57:	use Edge_Vectors;
+        -:   58:	use Vertex_Vectors;
+        -:   59:
+    #####:   60:	Edges: Edge_Vectors.Vector;
+    #####:   61:	Vertices: Vertex_Vectors.Vector;
+        -:   62:
+        -:   63:end Graph;
