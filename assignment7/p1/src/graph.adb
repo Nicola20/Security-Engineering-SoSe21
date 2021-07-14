@@ -9,7 +9,7 @@ package body Graph is
 	procedure Add_Vertex(Vertex: Vertex_Type) is
 	begin
 		if Vertices.Find(Vertex) = Vertex_Vectors.No_Element then
-			Ada.Text_IO.Put_Line("Added vertex");
+			--Ada.Text_IO.Put_Line("Added vertex");
 			Vertices.Append(Vertex);
 		else
 			raise Vertex_Already_In_Graph_Exception;
@@ -28,7 +28,7 @@ package body Graph is
 			if not Edges.Is_Empty then
 				for E of Edges loop
 					if E.From = From and E.To = To then
-						Ada.Text_IO.Put_Line("Added New Weight to already existing edge");
+						--Ada.Text_IO.Put_Line("Added New Weight to already existing edge");
 						E.Weight := Weight;
 						Edge_Already_Exists := True;
 						exit;
@@ -36,11 +36,11 @@ package body Graph is
 				end loop;
 				if Edge_Already_Exists = False then
 					Edges.Append(New_Edge);
-					Ada.Text_IO.Put_Line("Added New Edge");
+					--Ada.Text_IO.Put_Line("Added New Edge");
 				end if;
 			else
 				Edges.Append(New_Edge);
-				Ada.Text_IO.Put_Line("Added New Edge");
+				--Ada.Text_IO.Put_Line("Added New Edge");
 			end if;
 		end if;
 	end Add_Edge;
@@ -60,7 +60,10 @@ package body Graph is
 		if not Edges.Is_Empty then
 			for E of Edges loop
 				if E.From = From and E.To = To then
-					Ada.Text_IO.Put_Line(Integer'Image(E.Weight));
+					-- Ada.Text_IO.Put_Line(Integer'Image(E.Weight));
+					return E.Weight;
+				elsif E.From = To and E.To = From then
+					-- Ada.Text_IO.Put_Line(Integer'Image(E.Weight));
 					return E.Weight;
 				end if;
 			end loop;
@@ -76,14 +79,16 @@ package body Graph is
 		if not Edges.Is_Empty then
 			for E of Edges loop
 				if E.From = From and E.To = To then
-					Ada.Text_IO.Put_Line("Edge is inside graph");
+					--Ada.Text_IO.Put_Line("Edge is inside graph");
 					return True;
+				elsif E.From = To and E.To = From then
+						return True;
 				end if;
 			end loop;
-			Ada.Text_IO.Put_Line("Edge is not inside graph");
+			--Ada.Text_IO.Put_Line("Edge is not inside graph");
 			return False;
 		else
-			Ada.Text_IO.Put_Line("Edge is not inside graph");
+			--Ada.Text_IO.Put_Line("Edge is not inside graph");
 			return False;
 		end if;
 	end Has_Edge;
@@ -95,7 +100,7 @@ package body Graph is
 			for I in Edges.First_Index..Edges.Last_Index loop
 				if Edges.Element(I).From = From and Edges.Element(I).To = To then
 					Edges.Delete(I);
-					Ada.Text_IO.Put_Line("Deleted Edge");
+					--Ada.Text_IO.Put_Line("Deleted Edge");
 					return True;
 				end if;
 			end loop;

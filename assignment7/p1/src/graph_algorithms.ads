@@ -23,7 +23,7 @@ package Graph_Algorithms is
     -- edge weights. If a path exists, Path contains of the ordered sequence
     -- of vertices from From to To, excluding From and To.
     -- If no such path exists, Path will be empty.
-    -- procedure Find_Shortest_Path(From: Vertex_Type; To: Vertex_Type; Path: out Vertex_Array_Access);
+    procedure Find_Shortest_Path(From: Vertex_Type; To: Vertex_Type; Path: out Vertex_Array_Access);
 
     -- Implements Kruskal’s minimal-spanning-tree algorithm in the given graph
     -- with edge weights. If the graph is connected, Result will hold the
@@ -36,9 +36,12 @@ package Graph_Algorithms is
         type Subset is record
            ParentIndex : Natural;
            Rank : Integer;
+           Visited : Boolean;
         end record;
 
         type Subset_Array is array(Natural range <>) of Subset;
+
+        procedure Update_Distances (Subsets : in out Subset_Array; Graph_Vertices_Array: Vertex_Array_Access; Vert_Idx : in Natural);
 
         function "<" (L, R : Edge_Type) return Boolean;
         procedure Sort is new Ada.Containers.Generic_Array_Sort(
@@ -51,11 +54,19 @@ package Graph_Algorithms is
         procedure Union(Subs : in out Subset_Array; ARootIndex : Natural; BRootIndex : Natural);
         function Find(Subs : in out Subset_Array; Idx : Natural) return Natural;
 
-        package Result_Vectors is new Ada.Containers.Vectors(
+        package Result_Vertex_Vectors is new Ada.Containers.Vectors(
+            Element_Type => Vertex_Type,
+            Index_Type => Natural);
+
+        package Result_Edge_Vectors is new Ada.Containers.Vectors(
             Element_Type => Edge_Type,
             Index_Type => Natural);
-        use Result_Vectors;
-        Result_Vector: Result_Vectors.Vector;
+
+        use Result_Vertex_Vectors;
+        use Result_Edge_Vectors;
+
+        Result_Vertex_Vector: Result_Vertex_Vectors.Vector;
+        Result_Edge_Vector: Result_Edge_Vectors.Vector;
         -- result vectors to itterativly push elements to the result
 
 end Graph_Algorithms;

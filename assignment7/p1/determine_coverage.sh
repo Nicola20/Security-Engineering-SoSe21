@@ -9,7 +9,7 @@ TEST_DIR="$PROJECT_DIR/tests"
 cd $TEST_DIR
 testgen "graphalg_test_tg.ts"
 gprbuild "$PROJECT_DIR/p1_graphalg.gpr"
-"$BIN_DIR/"
+"$BIN_DIR/graphalg_test_tg"
 gcov "$BIN_DIR/graphalg_test_tg"
 mv *.gcov $COV_DIR
 lcov --capture --directory $PROJECT_DIR --output-file "$COV_DIR/lcov/coverage.info"
