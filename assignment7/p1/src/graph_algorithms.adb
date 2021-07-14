@@ -1,3 +1,7 @@
+-- Authors: Nicola Lea Libera (117073), Lucas Hübner (116232)
+-- Philipp Tornow (118332)
+--------------------------------------------------------------
+
 with Ada.Text_IO;
 package body Graph_Algorithms is
     use Ada.Text_IO;

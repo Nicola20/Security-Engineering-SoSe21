@@ -1,3 +1,7 @@
+-- Authors: Nicola Lea Libera (117073), Lucas Hübner (116232)
+-- Philipp Tornow (118332)
+--------------------------------------------------------------
+
 with Ada.Unchecked_Deallocation;
 with Ada.Containers.Generic_Array_Sort;
 with Ada.Containers.Vectors;
